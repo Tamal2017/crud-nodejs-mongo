@@ -1,0 +1,23 @@
+{
+  "name": "crud-nodejs-mongo",
+  "version": "1.0.0",
+  "description": "\"# crud-nodejs-mongodb\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tamal2017/crud-nodejs-mongo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tamal2017/crud-nodejs-mongo/issues"
+  },
+  "homepage": "https://github.com/Tamal2017/crud-nodejs-mongo#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "mongodb": "^3.6.9"
+  }
+}
