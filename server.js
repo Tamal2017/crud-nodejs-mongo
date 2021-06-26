@@ -1,14 +1,35 @@
-console.log('May Node be with you');
-
+const express = require('express');
+const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://127.0.0.1:27017';
+const url = 'mongodb://localhost:27017';
 const dbName = 'user-account';
-let db;
+const app = express();
 
-MongoClient.connect(url, { useNewUrlParser: true }, (err, client) => {
-    if (err) return console.log(err);
-    // Storing a reference to the database so you can use it later
+// Make sure you place body-parser before your CRUD handlers!
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.listen(3000, function() {
+    console.log('listening on 3000')
+});
+
+MongoClient.connect(url, (err, client) => {
+    if (err) return console.error('>>>> CONNECTION faild: ', err);
     db = client.db(dbName);
-    console.log(`Connected MongoDB: ${url}`);
-    console.log(`Database: ${dbName}`);
+    const usersCollection = db.collection('users');
+    /* CRUD FUNCTION */
+    // Post
+    app.post('/users', (req, res) => {
+        usersCollection.insertOne(req.body).then(result => {
+            res.redirect('/');
+        }).catch(error => console.error('>>>> POST Error: ', error))
+    });
+
+    // Get
+    app.get('/', (req, res) => {
+        db.collection('users').find().toArray().then(results => {
+            console.log(results);
+            res.sendFile(__dirname + '/index.html');
+        }).catch(error => console.error('>>>> GET Error: ', error));
+        // ...
+    });
 });
