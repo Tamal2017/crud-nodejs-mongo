@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://admin:admin@localhost:27017';
 const dbName = 'user-account';
 const app = express();
 
@@ -27,7 +27,7 @@ MongoClient.connect(url, (err, client) => {
     // Get
     app.get('/', (req, res) => {
         db.collection('users').find().toArray().then(results => {
-            console.log(results);
+            console.log('Number of user : ', results.length);
             res.sendFile(__dirname + '/index.html');
         }).catch(error => console.error('>>>> GET Error: ', error));
         // ...
