@@ -8,6 +8,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
   mongo-express:
+    depends_on:
+      - mongodb
     image: mongo-express
     ports:
       - 8080:8081

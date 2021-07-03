@@ -11,25 +11,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(3000, function() {
     console.log('listening on 3000')
 });
+// Get
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 
-MongoClient.connect(url, (err, client) => {
-    if (err) return console.error('>>>> CONNECTION faild: ', err);
-    db = client.db(dbName);
-    const usersCollection = db.collection('users');
-    /* CRUD FUNCTION */
-    // Post
-    app.post('/users', (req, res) => {
-        usersCollection.insertOne(req.body).then(result => {
+app.post('/users', (req, res) => {
+    MongoClient.connect(url, (err, client) => {
+        if (err) return console.error('>>>> CONNECTION faild: ', err);
+        db = client.db(dbName);
+        const usersCollection = db.collection('users');
+        usersCollection.insertOne(req.body).then(_result => {
             res.redirect('/');
-        }).catch(error => console.error('>>>> POST Error: ', error))
-    });
-
-    // Get
-    app.get('/', (req, res) => {
-        db.collection('users').find().toArray().then(results => {
-            console.log('Number of user : ', results.length);
-            res.sendFile(__dirname + '/index.html');
-        }).catch(error => console.error('>>>> GET Error: ', error));
-        // ...
+        }).catch(error => console.error('>>>> POST Error: ', error));
     });
 });
