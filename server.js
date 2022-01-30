@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const fs = require('fs');
 const url = 'mongodb://admin:password@localhost:27017';
 const dbName = 'user-account';
 const app = express();
@@ -25,4 +26,11 @@ app.post('/users', (req, res) => {
             res.redirect('/');
         }).catch(error => console.error('>>>> POST Error: ', error));
     });
+});
+
+// loading image
+app.get('/img', function(req, res) {
+    var img = fs.readFileSync('mongo.jpg');
+    res.write(200, { 'Content-Type': 'image/jpg' });
+    res.end(img, 'binary');
 });
