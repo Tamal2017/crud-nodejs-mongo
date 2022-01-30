@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://admin:admin@localhost:27017';
+const url = 'mongodb://admin:password@localhost:27017';
 const dbName = 'user-account';
 const app = express();
 
