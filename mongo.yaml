@@ -1,5 +1,9 @@
 version: "3"
 services:
+  crud-nodejs-mongo:
+    image: docker.io/d01jt/crud-nodejs-mongo:1.0.2
+    ports:
+     - 3000:3000
   mongodb:
     image: mongo
     ports:

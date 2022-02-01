@@ -2,7 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs');
-const url = 'mongodb://admin:password@localhost:27017';
+/**
+ * 1. Replace the url value by 'mongodb://admin:password@mongodb' if you want to run app with Docker-compose or
+ * 2. Replace the url value by 'mongodb://admin:password@localhost:27017' if you want to run app localy 
+ */
+const url = 'mongodb://admin:password@mongodb';
 const dbName = 'user-account';
 const app = express();
 
