@@ -35,7 +35,7 @@ app.post('/users', (req, res) => {
 });
 
 // loading image
-app.get('/app/img', function(req, res) {
+app.get('/img', function(req, res) {
     var img = fs.readFileSync('mongo.jpg');
     res.write(200, { 'Content-Type': 'image/jpg' });
     res.end(img, 'binary');
